@@ -16,5 +16,26 @@ namespace _2ARC
         {
             InitializeComponent();
         }
+
+        private void ReadButton_Click(object sender, EventArgs e)
+        {
+            ReadOutput ReadOutputWindow = new ReadOutput();
+            ReadOutputWindow.Show();
+            this.Hide();
+        }
+
+        private void CurrentNetworkButton_Click(object sender, EventArgs e)
+        {
+            CurrentNetwork currentNetworkWindow = new CurrentNetwork();
+            currentNetworkWindow.Show();
+            this.Hide();
+        }
+
+        private void RulesButton_Click(object sender, EventArgs e)
+        {
+            ApplyRules ApplyRulesWindow = new ApplyRules();
+            ApplyRulesWindow.Show();
+            this.Hide();
+        }
     }
 }
