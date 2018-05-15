@@ -28,23 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentNetwork));
+            this.buttonIconTray = new System.Windows.Forms.Button();
+            this.iconTray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.stopButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // buttonIconTray
+            // 
+            this.buttonIconTray.Location = new System.Drawing.Point(810, 702);
+            this.buttonIconTray.Name = "buttonIconTray";
+            this.buttonIconTray.Size = new System.Drawing.Size(197, 38);
+            this.buttonIconTray.TabIndex = 2;
+            this.buttonIconTray.Text = "Reduce To System Tray";
+            this.buttonIconTray.UseVisualStyleBackColor = true;
+            this.buttonIconTray.Click += new System.EventHandler(this.buttonIconTray_Click);
+            // 
+            // iconTray
+            // 
+            this.iconTray.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.iconTray.BalloonTipText = "Application running in bakcground";
+            this.iconTray.Icon = ((System.Drawing.Icon)(resources.GetObject("iconTray.Icon")));
+            this.iconTray.Text = "Firewall";
+            this.iconTray.Visible = true;
+            this.iconTray.Click += new System.EventHandler(this.OnClickIconTray);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(455, 702);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(112, 33);
+            this.stopButton.TabIndex = 3;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // CurrentNetwork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 515);
+            this.ClientSize = new System.Drawing.Size(1019, 752);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.buttonIconTray);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CurrentNetwork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CurrentNetwork";
+            this.Text = "Firewall";
             this.Load += new System.EventHandler(this.CurrentNetwork_Load);
+            this.Resize += new System.EventHandler(this.CurrentNetwork_Resize);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button buttonIconTray;
+        private System.Windows.Forms.NotifyIcon iconTray;
+        private System.Windows.Forms.Button stopButton;
     }
 }

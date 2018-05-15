@@ -36,7 +36,7 @@
             // 
             // ReadButton
             // 
-            this.ReadButton.Location = new System.Drawing.Point(355, 153);
+            this.ReadButton.Location = new System.Drawing.Point(145, 405);
             this.ReadButton.Name = "ReadButton";
             this.ReadButton.Size = new System.Drawing.Size(153, 68);
             this.ReadButton.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // CurrentNetworkButton
             // 
-            this.CurrentNetworkButton.Location = new System.Drawing.Point(355, 279);
+            this.CurrentNetworkButton.Location = new System.Drawing.Point(559, 405);
             this.CurrentNetworkButton.Name = "CurrentNetworkButton";
             this.CurrentNetworkButton.Size = new System.Drawing.Size(153, 68);
             this.CurrentNetworkButton.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // RulesButton
             // 
-            this.RulesButton.Location = new System.Drawing.Point(355, 402);
+            this.RulesButton.Location = new System.Drawing.Point(349, 223);
             this.RulesButton.Name = "RulesButton";
             this.RulesButton.Size = new System.Drawing.Size(153, 68);
             this.RulesButton.TabIndex = 2;
@@ -76,7 +76,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LauncherWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "2ARC";
+            this.Text = "Firewall";
             this.ResumeLayout(false);
 
         }

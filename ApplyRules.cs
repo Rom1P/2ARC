@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,12 +65,65 @@ namespace _2ARC
                 {
                     IPAddressList.Add(IPAddressString);
                     listBoxIP.Items.Add(IPAddressString);
-                    /*Block IP*/
+
+                    string[] arrayToWrite = IPAddressList.ToArray();
+
+                    File.WriteAllLines("..\\..\\pythonScripts\\ListIP.txt", arrayToWrite);
+
                 }
             }
+        }
 
+        private void blockPortButton_Click(object sender, EventArgs e)
+        {
+            string PortString = textBoxPort.Text;
 
+            if (PortString != "")
+            {
+                try
+                {
+                    int Port = Int32.Parse(PortString);
+                    textBoxPort.Text = "";
 
+                    if (PortList.Contains(Port))
+                    {
+                        MessageBox.Show("This Port is already on the list of blocked addresses", "Port already exist", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+
+                    else
+                    {
+                        PortList.Add(Port);
+                        listBoxPort.Items.Add(Port.ToString());
+                    }
+                }
+
+                catch
+                {
+
+                }
+
+            }
+        }
+
+        private void blockMacButton_Click(object sender, EventArgs e)
+        {
+            string MacAddressString = textBoxMac.Text;
+
+            if (MacAddressString != "")
+            {
+                textBoxMac.Text = "";
+
+                if (MacAdressList.Contains(MacAddressString))
+                {
+                    MessageBox.Show("This Mac Address is already on the list of blocked addresses", "Mac Address already exist", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+
+                else
+                {
+                    MacAdressList.Add(MacAddressString);
+                    listBoxMac.Items.Add(MacAddressString);
+                }
+            }
         }
     }
 }
