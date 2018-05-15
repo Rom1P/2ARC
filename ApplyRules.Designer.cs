@@ -34,6 +34,7 @@
             this.buttonIconTray = new System.Windows.Forms.Button();
             this.IPtextBox = new System.Windows.Forms.TextBox();
             this.addNewIpButton = new System.Windows.Forms.Button();
+            this.listBoxIP = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // iconTray
@@ -47,7 +48,7 @@
             // 
             // buttonIconTray
             // 
-            this.buttonIconTray.Location = new System.Drawing.Point(668, 577);
+            this.buttonIconTray.Location = new System.Drawing.Point(725, 627);
             this.buttonIconTray.Name = "buttonIconTray";
             this.buttonIconTray.Size = new System.Drawing.Size(197, 38);
             this.buttonIconTray.TabIndex = 1;
@@ -58,32 +59,42 @@
             // IPtextBox
             // 
             this.IPtextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IPtextBox.Location = new System.Drawing.Point(128, 161);
+            this.IPtextBox.Location = new System.Drawing.Point(126, 167);
             this.IPtextBox.Multiline = true;
             this.IPtextBox.Name = "IPtextBox";
-            this.IPtextBox.Size = new System.Drawing.Size(199, 35);
+            this.IPtextBox.Size = new System.Drawing.Size(199, 32);
             this.IPtextBox.TabIndex = 2;
             // 
             // addNewIpButton
             // 
-            this.addNewIpButton.Location = new System.Drawing.Point(130, 283);
+            this.addNewIpButton.Location = new System.Drawing.Point(126, 298);
             this.addNewIpButton.Name = "addNewIpButton";
-            this.addNewIpButton.Size = new System.Drawing.Size(197, 70);
+            this.addNewIpButton.Size = new System.Drawing.Size(199, 43);
             this.addNewIpButton.TabIndex = 3;
-            this.addNewIpButton.Text = "Block Trafic with this IP Address";
+            this.addNewIpButton.Text = "Block packets from this IP";
             this.addNewIpButton.UseVisualStyleBackColor = true;
             this.addNewIpButton.Click += new System.EventHandler(this.AddNewIpButton_Click);
+            // 
+            // listBoxIP
+            // 
+            this.listBoxIP.FormattingEnabled = true;
+            this.listBoxIP.Location = new System.Drawing.Point(126, 447);
+            this.listBoxIP.Name = "listBoxIP";
+            this.listBoxIP.Size = new System.Drawing.Size(199, 147);
+            this.listBoxIP.TabIndex = 4;
             // 
             // ApplyRules
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 630);
+            this.ClientSize = new System.Drawing.Size(934, 677);
+            this.Controls.Add(this.listBoxIP);
             this.Controls.Add(this.addNewIpButton);
             this.Controls.Add(this.IPtextBox);
             this.Controls.Add(this.buttonIconTray);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ApplyRules";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ApplyRules";
             this.Resize += new System.EventHandler(this.ApplyRules_Resize);
             this.ResumeLayout(false);
@@ -96,5 +107,6 @@
         private System.Windows.Forms.NotifyIcon iconTray;
         private System.Windows.Forms.TextBox IPtextBox;
         private System.Windows.Forms.Button addNewIpButton;
+        private System.Windows.Forms.ListBox listBoxIP;
     }
 }

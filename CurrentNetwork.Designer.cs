@@ -38,6 +38,7 @@
             this.ClientSize = new System.Drawing.Size(775, 515);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CurrentNetwork";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CurrentNetwork";
             this.Load += new System.EventHandler(this.CurrentNetwork_Load);
             this.ResumeLayout(false);

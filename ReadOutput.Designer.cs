@@ -51,6 +51,7 @@
             this.Controls.Add(this.GoMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReadOutput";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReadOutput";
             this.Load += new System.EventHandler(this.ReadOutput_Load);
             this.ResumeLayout(false);

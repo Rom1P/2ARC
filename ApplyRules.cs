@@ -50,6 +50,26 @@ namespace _2ARC
         private void AddNewIpButton_Click(object sender, EventArgs e)
         {
             string IPAddressString = IPtextBox.Text;
+
+            if (IPAddressString != "")
+            {
+                IPtextBox.Text = "";
+
+                if (IPAddressList.Contains(IPAddressString))
+                {
+                    MessageBox.Show("This IP is already on the list of blocked addresses", "IP already exist", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+
+                else
+                {
+                    IPAddressList.Add(IPAddressString);
+                    listBoxIP.Items.Add(IPAddressString);
+                    /*Block IP*/
+                }
+            }
+
+
+
         }
     }
 }
