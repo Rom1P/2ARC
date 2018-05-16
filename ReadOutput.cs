@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace _2ARC
     public partial class ReadOutput : Form
     {
         private string path;
+        private string pythonPath;
         public ReadOutput()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace _2ARC
 
         private void ReadOutput_Load(object sender, EventArgs e)
         {
-            
+            OpenFile.Filter = "Capture Files|*.cap;*.pcap";
         }
 
         private void GoMenu_Click(object sender, EventArgs e)
@@ -36,11 +38,60 @@ namespace _2ARC
 
         private void ApplyRulesButton_Click(object sender, EventArgs e)
         {
+            Process processScriptPython = new Process();
 
+            string scriptPath = "..\\..\\pythonScripts\\readFile.py";
+
+
+            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
+            processScriptPython.StartInfo.CreateNoWindow = true;
+            processScriptPython.Start();
+
+            processScriptPython.WaitForExit();
+
+            textBoxOutput.Text = "";
+
+            string[] ArrayReadFile = File.ReadAllLines("..\\..\\pythonScripts\\readFileConverted.txt");
+            string[] portArray = File.ReadAllLines("..\\..\\pythonScripts\\ListPort.txt");
+            string[] ipArray = File.ReadAllLines("..\\..\\pythonScripts\\ListIP.txt");
+
+            
+
+            foreach (string tempPacket in ArrayReadFile)
+            {
+                string[] tempPackedSplit = tempPacket.Split(',');
+
+
+                textBoxOutput.Text += tempPacket;
+
+                string portStart = tempPackedSplit[2].ToString();
+                portStart = portStart.Substring(1,portStart.Length-1);
+
+
+                string portArrival = tempPackedSplit[4].ToString();
+                portArrival = portArrival.Substring(1, portStart.Length - 1);
+
+
+                string ipStart = tempPackedSplit[0].ToString();
+                ipStart = ipStart.Substring(1, portStart.Length - 1);
+
+
+                string ipArrival = tempPackedSplit[0].ToString();
+                ipArrival = ipArrival.Substring(1, portStart.Length - 1);
+
+                if (Array.IndexOf(portArray, portStart) > -1 || Array.IndexOf(portArray, portArrival) > -1 || Array.IndexOf(ipArray,ipStart) > -1 || Array.IndexOf(ipArray, ipArrival) > -1)
+                {
+                    textBoxOutput.Text += " Dropped";
+                }
+
+                textBoxOutput.Text += Environment.NewLine;
+
+            }
         }
 
         private void openFileButton_Click(object sender, EventArgs e)
         {
+
             DialogResult result = OpenFile.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -52,33 +103,61 @@ namespace _2ARC
 
         private void LoadFile()
         {
-            ICaptureDevice deviceReader;
-            deviceReader = new CaptureFileReaderDevice("D:\\2ARCRessources\\9p.cap");
+            Process processScriptPython = new Process();
 
-            deviceReader.Open();
+            string scriptPath = "..\\..\\pythonScripts\\readFile.py";
 
-            deviceReader.OnPacketArrival += new PacketArrivalEventHandler(PacketArrivalDisplayInfos);
 
-            deviceReader.Capture();
+            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
+            processScriptPython.StartInfo.CreateNoWindow = true;
+            processScriptPython.Start();
 
-            deviceReader.Close();
+            processScriptPython.WaitForExit();
 
+            textBoxOutput.Text = "";
+
+
+            string[] ArrayReadFile = File.ReadAllLines("..\\..\\pythonScripts\\readFileConverted.txt");
+            foreach (string tempPacket in ArrayReadFile)
+            {
+                textBoxOutput.Text += tempPacket;
+                textBoxOutput.Text += Environment.NewLine;
+            }
 
         }
 
-        private void PacketArrivalDisplayInfos(object sender, CaptureEventArgs e)
+        private string GetPythonPath()
         {
-            if (e.Packet.LinkLayerType == LinkLayers.Ethernet)
-            {
-                var packet = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
-                var ethernetPacket = (EthernetPacket)packet;
+            string pythonFolder = "";
 
-                Console.WriteLine(
-                                  e.Packet.Timeval.Date.ToString(),
-                                  e.Packet.Timeval.Date.Millisecond,
-                                  ethernetPacket.SourceHwAddress,
-                                  ethernetPacket.DestinationHwAddress);
+            try
+            {
+                Process cmdCheckPythonPath = new Process();
+                cmdCheckPythonPath.StartInfo.FileName = "cmd.exe";
+                cmdCheckPythonPath.StartInfo.CreateNoWindow = true;
+                cmdCheckPythonPath.StartInfo.RedirectStandardInput = true;
+                cmdCheckPythonPath.StartInfo.RedirectStandardOutput = true;
+                cmdCheckPythonPath.StartInfo.UseShellExecute = false;
+
+                cmdCheckPythonPath.Start();
+
+                cmdCheckPythonPath.StandardInput.WriteLine("py ..\\..\\pythonScripts\\readFile.py");
+                cmdCheckPythonPath.StandardInput.Flush();
+                cmdCheckPythonPath.StandardInput.Close();
+                cmdCheckPythonPath.WaitForExit();
+
+                Console.WriteLine(cmdCheckPythonPath.StandardOutput.ReadToEnd());
+
+                pythonFolder = cmdCheckPythonPath.StandardOutput.ReadToEnd();
             }
+
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show("It seems we can't find python on your pc \n You need to install python to use our firewall", "Python is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return pythonFolder;
         }
     }
 }

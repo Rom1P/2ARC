@@ -61,7 +61,8 @@
             this.textBoxOutput.Location = new System.Drawing.Point(81, 97);
             this.textBoxOutput.Multiline = true;
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(761, 429);
+            this.textBoxOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxOutput.Size = new System.Drawing.Size(761, 430);
             this.textBoxOutput.TabIndex = 2;
             // 
             // openFileButton

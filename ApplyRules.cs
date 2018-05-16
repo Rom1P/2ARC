@@ -16,20 +16,53 @@ namespace _2ARC
 
         private List<string> IPAddressList;
         private List<string> PortList;
-        private List<string> MacAdressList;
 
 
         public ApplyRules()
         {
             InitializeComponent();
             IPAddressList = new List<string>();
-            MacAdressList = new List<string>();
-            PortList = new List<int>();
+            PortList = new List<string>();
         }
 
         private void buttonIconTray_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ApplyRules_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] IPAddressArray = File.ReadAllLines("..\\..\\pythonScripts\\ListIP.txt");
+                foreach (string IPTemp in IPAddressArray)
+                {
+                    listBoxIP.Items.Add(IPTemp);
+                    IPAddressList.Add(IPTemp);
+                }
+            }
+
+            catch
+            {
+
+            }
+
+            try
+            {
+                string[] PortArray = File.ReadAllLines("..\\..\\pythonScripts\\ListPort.txt");
+                foreach (string PortTemp in PortArray)
+                {
+                    listBoxPort.Items.Add(PortTemp);
+                    PortList.Add(PortTemp);
+                }
+            }
+
+            catch
+            {
+
+            }
+
+
         }
 
         private void ApplyRules_Resize(object sender, EventArgs e)
@@ -109,25 +142,77 @@ namespace _2ARC
             }
         }
 
-        private void blockMacButton_Click(object sender, EventArgs e)
+        private void resetIPButton_Click(object sender, EventArgs e)
         {
-            string MacAddressString = textBoxMac.Text;
+            IPAddressList = new List<string>();
 
-            if (MacAddressString != "")
+            string[] arrayToWrite = IPAddressList.ToArray();
+
+            File.WriteAllLines("..\\..\\pythonScripts\\ListIP.txt", arrayToWrite);
+
+            listBoxIP.Items.Clear();
+        }
+
+        private void resetPortButton_Click(object sender, EventArgs e)
+        {
+            PortList = new List<string>();
+
+            string[] arrayToWrite = PortList.ToArray();
+
+            File.WriteAllLines("..\\..\\pythonScripts\\ListPort.txt", arrayToWrite);
+
+            listBoxPort.Items.Clear();
+        }
+
+        private void deleteSelectedIP_Click(object sender, EventArgs e)
+        {
+            try
             {
-                textBoxMac.Text = "";
+                IPAddressList.RemoveAt(listBoxIP.SelectedIndex);
 
-                if (MacAdressList.Contains(MacAddressString))
-                {
-                    MessageBox.Show("This Mac Address is already on the list of blocked addresses", "Mac Address already exist", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
+                string[] arrayToWrite = IPAddressList.ToArray();
 
-                else
-                {
-                    MacAdressList.Add(MacAddressString);
-                    listBoxMac.Items.Add(MacAddressString);
-                }
+                File.WriteAllLines("..\\..\\pythonScripts\\ListIP.txt", arrayToWrite);
+
+                listBoxIP.Items.Remove(listBoxIP.SelectedItem);
             }
+
+            catch(Exception efkje)
+            {
+                Console.WriteLine(efkje);
+            }
+        }
+
+        private void RemovePortButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PortList.RemoveAt(listBoxPort.SelectedIndex);
+
+                string[] arrayToWrite = PortList.ToArray();
+
+                File.WriteAllLines("..\\..\\pythonScripts\\ListPort.txt", arrayToWrite);
+
+                listBoxPort.Items.Remove(listBoxPort.SelectedItem);
+            }
+            catch
+            {
+                Console.WriteLine("flezk,fezlk");
+            }
+        }
+
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            LauncherWindow launcherWindowObject = new LauncherWindow();
+            launcherWindowObject.Show();
+            this.Close();
+        }
+
+        private void NetworkButton_Click(object sender, EventArgs e)
+        {
+            CurrentNetwork currentNetworkWindow = new CurrentNetwork();
+            currentNetworkWindow.Show();
+            this.Close();
         }
     }
 }

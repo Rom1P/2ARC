@@ -36,7 +36,7 @@
             // 
             // ReadButton
             // 
-            this.ReadButton.Location = new System.Drawing.Point(145, 405);
+            this.ReadButton.Location = new System.Drawing.Point(138, 458);
             this.ReadButton.Name = "ReadButton";
             this.ReadButton.Size = new System.Drawing.Size(153, 68);
             this.ReadButton.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // CurrentNetworkButton
             // 
-            this.CurrentNetworkButton.Location = new System.Drawing.Point(559, 405);
+            this.CurrentNetworkButton.Location = new System.Drawing.Point(608, 458);
             this.CurrentNetworkButton.Name = "CurrentNetworkButton";
             this.CurrentNetworkButton.Size = new System.Drawing.Size(153, 68);
             this.CurrentNetworkButton.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // RulesButton
             // 
-            this.RulesButton.Location = new System.Drawing.Point(349, 223);
+            this.RulesButton.Location = new System.Drawing.Point(359, 237);
             this.RulesButton.Name = "RulesButton";
             this.RulesButton.Size = new System.Drawing.Size(153, 68);
             this.RulesButton.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 644);
+            this.ClientSize = new System.Drawing.Size(884, 646);
             this.Controls.Add(this.RulesButton);
             this.Controls.Add(this.CurrentNetworkButton);
             this.Controls.Add(this.ReadButton);
@@ -77,6 +77,7 @@
             this.Name = "LauncherWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Firewall";
+            this.Load += new System.EventHandler(this.LauncherWindow_Load);
             this.ResumeLayout(false);
 
         }

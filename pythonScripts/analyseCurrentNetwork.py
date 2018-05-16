@@ -1,33 +1,40 @@
 import pydivert
 
-def AnalysePackets():
 
+def AnalysePackets():
     print("Start")
 
-    IPList = GetIPList()
-    PortList = GetPortList()
+    try:
+        IPList = GetIPList()
 
+    except:
+        IPList = []
+
+    try:
+        PortList = GetPortList()
+    except:
+        PortList = ["54915"]
 
     """54915"""
 
     with pydivert.WinDivert() as w:
         for packet in w:
             if str(packet.src_port) in PortList or str(packet.dst_port) in PortList:
-                print(packet.src_addr, packet.src_port," ---> ",packet.dst_addr, packet.dst_port," --> Dropped")
-                break
+                print(packet.src_addr, packet.src_port, " ---> ", packet.dst_addr, packet.dst_port,
+                      " --> Dropped For Port")
+            elif str(packet.src_addr) in IPList or str(packet.dst_addr) in IPList:
+                print(packet.src_addr, packet.src_port, " ---> ", packet.dst_addr, packet.dst_port,
+                      " --> Dropped for IP")
             else:
                 w.send(packet)
-
-                print(packet.src_addr, packet.src_port," ---> ",packet.dst_addr, packet.dst_port)
+                print(packet.src_addr, packet.src_port, " ---> ", packet.dst_addr, packet.dst_port)
 
     print("Done")
-
-    i = input("POTATO")
 
 
 def GetIPList():
     IPList = []
-    with open('ListIP.txt', 'r') as ListIPFile:
+    with open('..\\..\\pythonScripts\\ListIP.txt', 'r') as ListIPFile:
         IPString = ListIPFile.read()
         IPList = IPString.split("\n")
 
@@ -38,12 +45,13 @@ def GetIPList():
 
 def GetPortList():
     PortList = []
-    with open('ListPort.txt', 'r') as ListPortFile:
+    with open('..\\..\\pythonScripts\\ListPort.txt', 'r') as ListPortFile:
         PortString = ListPortFile.read()
         PortList = PortString.split("\n")
 
     PortList = PortList[:-1]
 
     return PortList
+
 
 AnalysePackets()

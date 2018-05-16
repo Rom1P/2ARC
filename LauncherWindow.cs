@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace _2ARC
         public LauncherWindow()
         {
             InitializeComponent();
+        }
+
+        private void LauncherWindow_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void ReadButton_Click(object sender, EventArgs e)
@@ -37,5 +43,7 @@ namespace _2ARC
             ApplyRulesWindow.Show();
             this.Hide();
         }
+
+        
     }
 }

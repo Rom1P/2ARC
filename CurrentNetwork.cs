@@ -1,8 +1,4 @@
-﻿using SharpPcap;
-using SharpPcap.AirPcap;
-using SharpPcap.LibPcap;
-using SharpPcap.WinPcap;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,17 +19,18 @@ namespace _2ARC
         public CurrentNetwork()
         {
             InitializeComponent();
-            string fileName = @"D:\2ARC\pythonScripts\analyseCurrentNetwork.py";
+
+            string scriptPath = "..\\..\\pythonScripts\\analyseCurrentNetwork.py";
 
 
-            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", fileName);
+            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
             processScriptPython.StartInfo.Verb = "runas";
             processScriptPython.StartInfo.CreateNoWindow = true;
         }
 
         private void CurrentNetwork_Load(object sender, EventArgs e)
         {
-            processScriptPython.Start();
+
         }
 
         private void buttonIconTray_Click(object sender, EventArgs e)
@@ -59,8 +56,19 @@ namespace _2ARC
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Closing");
             processScriptPython.Kill();
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            processScriptPython.Start();
+        }
+
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            LauncherWindow launcherWindowObject = new LauncherWindow();
+            launcherWindowObject.Show();
+            this.Close();
         }
     }
 }

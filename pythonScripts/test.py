@@ -6,4 +6,3 @@ file.write(" and this is another line.")
 file.write("Why? Becausewecan.")
 
 file.close()
-
