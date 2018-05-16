@@ -4,18 +4,21 @@ def AnalysePackets():
 
     print("Start")
 
+    IPList = GetIPList()
+    PortList = GetPortList()
+
+
+    """54915"""
+
     with pydivert.WinDivert() as w:
         for packet in w:
-            if packet.dst_port == 1234:
-                print(">") # packet to the server
-                packet.dst_port = 80
-            if packet.src_port == 80:
-                print("<") # reply from the server
-                packet.src_port = 1234
+            if str(packet.src_port) in PortList or str(packet.dst_port) in PortList:
+                print(packet.src_addr, packet.src_port," ---> ",packet.dst_addr, packet.dst_port," --> Dropped")
+                break
+            else:
+                w.send(packet)
 
-            print(packet.src_addr, packet.src_port)
-            print(packet.dst_addr, packet.dst_port)
-            w.send(packet)
+                print(packet.src_addr, packet.src_port," ---> ",packet.dst_addr, packet.dst_port)
 
     print("Done")
 
@@ -30,6 +33,17 @@ def GetIPList():
 
     IPList = IPList[:-1]
 
-    print(IPList)
+    return IPList
 
-GetIPList()
+
+def GetPortList():
+    PortList = []
+    with open('ListPort.txt', 'r') as ListPortFile:
+        PortString = ListPortFile.read()
+        PortList = PortString.split("\n")
+
+    PortList = PortList[:-1]
+
+    return PortList
+
+AnalysePackets()

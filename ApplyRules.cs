@@ -15,7 +15,7 @@ namespace _2ARC
     {
 
         private List<string> IPAddressList;
-        private List<int> PortList;
+        private List<string> PortList;
         private List<string> MacAdressList;
 
 
@@ -85,15 +85,19 @@ namespace _2ARC
                     int Port = Int32.Parse(PortString);
                     textBoxPort.Text = "";
 
-                    if (PortList.Contains(Port))
+                    if (PortList.Contains(PortString))
                     {
                         MessageBox.Show("This Port is already on the list of blocked addresses", "Port already exist", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
 
                     else
                     {
-                        PortList.Add(Port);
-                        listBoxPort.Items.Add(Port.ToString());
+                        PortList.Add(PortString);
+                        listBoxPort.Items.Add(PortString);
+
+                        string[] arrayToWrite = PortList.ToArray();
+
+                        File.WriteAllLines("..\\..\\pythonScripts\\ListPort.txt", arrayToWrite);
                     }
                 }
 
