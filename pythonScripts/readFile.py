@@ -1,8 +1,4 @@
-# If scapy module is not install please use:
-# pip install scapy
-
 from scapy.all import *
-
 
 def getPacketsFromFile(filePath):
     try:
@@ -22,8 +18,7 @@ def formattedSummary(packets):
 
 
 def returnProtocolType(pValue):
-    protocol = 'ukn'
-    # Those numbers are not magic, jsut designate by RFC & IANA
+    # Those numbers are designate by RFC & IANA
     if (pValue == 6):
         protocol = 'TCP'
     elif (pValue == 17):
@@ -45,8 +40,6 @@ def getPacketInfo(packet):
     with open('..\\..\\pythonScripts\\readFileConverted.txt', 'a') as fileConverted:
         fileConverted.write(str(packetInfo)+"\n")
 
-    # Enter the file to the .cap file, if file is in the same directory simply write the file name.cap
-
 
 def readFunction():
     filePath = ""
@@ -58,6 +51,7 @@ def readFunction():
 
     with open('..\\..\\pythonScripts\\readFileConverted.txt', 'w') as fileConverted:
         fileConverted.write("")
+
     # Uses Scapy to fetch data for each packet and stores them in an array
     formattedSummary(packets)
 

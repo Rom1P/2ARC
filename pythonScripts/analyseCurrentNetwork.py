@@ -1,6 +1,5 @@
 import pydivert
 
-
 def AnalysePackets():
     print("Start")
 
@@ -14,8 +13,6 @@ def AnalysePackets():
         PortList = GetPortList()
     except:
         PortList = []
-
-    PortList = ["54915"]
 
     with open('..\\..\\pythonScripts\\ListBlocked.txt', 'w') as ListBlocked:
         ListBlocked.write("")

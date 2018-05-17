@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PacketDotNet;
@@ -111,6 +112,7 @@ namespace _2ARC
         {
             Process processScriptPython = new Process();
 
+
             string scriptPath = "..\\..\\pythonScripts\\readFile.py";
             GetPythonPath();
 
@@ -121,9 +123,13 @@ namespace _2ARC
 
             processScriptPython.StartInfo = new ProcessStartInfo(CompletePathPython, scriptPath);
             processScriptPython.StartInfo.CreateNoWindow = true;
+            processScriptPython.StartInfo.UseShellExecute = false;
+
             processScriptPython.Start();
 
             processScriptPython.WaitForExit();
+
+
 
             textBoxOutput.Text = "";
 
