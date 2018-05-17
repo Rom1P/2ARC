@@ -36,6 +36,8 @@
             this.checkBoxDevMode = new System.Windows.Forms.CheckBox();
             this.StartButton = new System.Windows.Forms.Button();
             this.menuButton = new System.Windows.Forms.Button();
+            this.listBoxOutput = new System.Windows.Forms.ListBox();
+            this.timerReload = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // buttonIconTray
@@ -97,11 +99,25 @@
             this.menuButton.UseVisualStyleBackColor = true;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
+            // listBoxOutput
+            // 
+            this.listBoxOutput.FormattingEnabled = true;
+            this.listBoxOutput.Location = new System.Drawing.Point(151, 82);
+            this.listBoxOutput.Name = "listBoxOutput";
+            this.listBoxOutput.Size = new System.Drawing.Size(698, 485);
+            this.listBoxOutput.TabIndex = 10;
+            // 
+            // timerReload
+            // 
+            this.timerReload.Interval = 2000;
+            this.timerReload.Tick += new System.EventHandler(this.timerReload_Tick);
+            // 
             // CurrentNetwork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 752);
+            this.Controls.Add(this.listBoxOutput);
             this.Controls.Add(this.menuButton);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.checkBoxDevMode);
@@ -111,6 +127,7 @@
             this.Name = "CurrentNetwork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Firewall";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CurrentNetwork_Closing);
             this.Load += new System.EventHandler(this.CurrentNetwork_Load);
             this.Resize += new System.EventHandler(this.CurrentNetwork_Resize);
             this.ResumeLayout(false);
@@ -126,5 +143,7 @@
         private System.Windows.Forms.CheckBox checkBoxDevMode;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button menuButton;
+        private System.Windows.Forms.ListBox listBoxOutput;
+        private System.Windows.Forms.Timer timerReload;
     }
 }

@@ -61,7 +61,5 @@ def readFunction():
     # Uses Scapy to fetch data for each packet and stores them in an array
     formattedSummary(packets)
 
-    print('potato')
-
 
 readFunction()

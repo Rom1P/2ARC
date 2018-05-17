@@ -16,21 +16,17 @@ namespace _2ARC
     public partial class CurrentNetwork : Form
     {
         Process processScriptPython = new Process();
+        string scriptPath = "..\\..\\pythonScripts\\analyseCurrentNetwork.py";
+
         public CurrentNetwork()
         {
             InitializeComponent();
 
-            string scriptPath = "..\\..\\pythonScripts\\analyseCurrentNetwork.py";
-
-
-            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
-            processScriptPython.StartInfo.Verb = "runas";
-            processScriptPython.StartInfo.CreateNoWindow = true;
         }
 
         private void CurrentNetwork_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void buttonIconTray_Click(object sender, EventArgs e)
@@ -54,14 +50,40 @@ namespace _2ARC
             this.WindowState = FormWindowState.Normal;
         }
 
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            GetPythonPath();
+
+            string absolutePathPython = File.ReadAllText("..\\..\\pythonScripts\\localPathPython.txt");
+            string CompletePathPython;
+
+            if (checkBoxDevMode.Checked)
+            {
+                CompletePathPython = absolutePathPython + "\\python.exe";
+            }
+
+            else
+            {
+                CompletePathPython = absolutePathPython + "\\pythonw.exe";
+            }
+
+
+
+            processScriptPython.StartInfo = new ProcessStartInfo(CompletePathPython, scriptPath);
+
+
+            processScriptPython.StartInfo = new ProcessStartInfo(CompletePathPython, scriptPath);
+            processScriptPython.StartInfo.Verb = "runas";
+            processScriptPython.StartInfo.CreateNoWindow = true;
+            processScriptPython.Start();
+
+            timerReload.Start();
+        }
+
         private void stopButton_Click(object sender, EventArgs e)
         {
             processScriptPython.Kill();
-        }
-
-        private void StartButton_Click(object sender, EventArgs e)
-        {
-            processScriptPython.Start();
+            timerReload.Stop();
         }
 
         private void menuButton_Click(object sender, EventArgs e)
@@ -69,6 +91,77 @@ namespace _2ARC
             LauncherWindow launcherWindowObject = new LauncherWindow();
             launcherWindowObject.Show();
             this.Close();
+        }
+
+        private void CurrentNetwork_Closing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                processScriptPython.Kill();
+            }
+
+            catch
+            {
+
+            }
+
+            try
+            {
+                timerReload.Stop();
+            }
+
+            catch
+            {
+                
+            }
+        }
+
+        private void LoadDroppedPackets()
+        {
+            string BlockedPackets = File.ReadAllText("..\\..\\pythonScripts\\ListBlocked.txt");
+            string[] ArrayBlockedPackets = BlockedPackets.Split('\n');
+
+            listBoxOutput.Items.Clear();
+
+            foreach (string tempPacket in ArrayBlockedPackets)
+            {
+                listBoxOutput.Items.Add(tempPacket);
+            }
+        }
+        
+        private void GetPythonPath()
+        {
+            try
+            {
+                Process cmdCheckPythonPath = new Process();
+                cmdCheckPythonPath.StartInfo.FileName = "cmd.exe";
+                cmdCheckPythonPath.StartInfo.CreateNoWindow = true;
+                cmdCheckPythonPath.StartInfo.RedirectStandardInput = true;
+                cmdCheckPythonPath.StartInfo.RedirectStandardOutput = true;
+                cmdCheckPythonPath.StartInfo.UseShellExecute = false;
+
+                cmdCheckPythonPath.Start();
+
+                cmdCheckPythonPath.StandardInput.WriteLine("py ..\\..\\pythonScripts\\getPyDir.py");
+                cmdCheckPythonPath.StandardInput.Flush();
+                cmdCheckPythonPath.StandardInput.Close();
+
+
+                cmdCheckPythonPath.WaitForExit();
+
+            }
+
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show("It seems we can't find python on your pc \n You need to install python to use our firewall", "Python is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void timerReload_Tick(object sender, EventArgs e)
+        {
+            LoadDroppedPackets();
         }
     }
 }

@@ -39,11 +39,16 @@ namespace _2ARC
         private void ApplyRulesButton_Click(object sender, EventArgs e)
         {
             Process processScriptPython = new Process();
-
+            
             string scriptPath = "..\\..\\pythonScripts\\readFile.py";
+            GetPythonPath();
+
+            string absolutePathPython = File.ReadAllText("..\\..\\pythonScripts\\localPathPython.txt");
+
+            string CompletePathPython = absolutePathPython + "\\pythonw.exe";
 
 
-            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
+            processScriptPython.StartInfo = new ProcessStartInfo(CompletePathPython, scriptPath);
             processScriptPython.StartInfo.CreateNoWindow = true;
             processScriptPython.Start();
 
@@ -97,6 +102,7 @@ namespace _2ARC
             if (result == DialogResult.OK)
             {
                 path = OpenFile.FileName;
+                File.WriteAllText("..\\..\\pythonScripts\\filePath.txt", path);
                 LoadFile();
             }
         }
@@ -106,9 +112,14 @@ namespace _2ARC
             Process processScriptPython = new Process();
 
             string scriptPath = "..\\..\\pythonScripts\\readFile.py";
+            GetPythonPath();
+
+            string absolutePathPython = File.ReadAllText("..\\..\\pythonScripts\\localPathPython.txt");
+
+            string CompletePathPython = absolutePathPython + "\\pythonw.exe";
 
 
-            processScriptPython.StartInfo = new ProcessStartInfo(@"C:\Users\Romain\AppData\Local\Programs\Python\Python36-32\python.exe", scriptPath);
+            processScriptPython.StartInfo = new ProcessStartInfo(CompletePathPython, scriptPath);
             processScriptPython.StartInfo.CreateNoWindow = true;
             processScriptPython.Start();
 
@@ -126,10 +137,8 @@ namespace _2ARC
 
         }
 
-        private string GetPythonPath()
+        private void GetPythonPath()
         {
-            string pythonFolder = "";
-
             try
             {
                 Process cmdCheckPythonPath = new Process();
@@ -141,14 +150,12 @@ namespace _2ARC
 
                 cmdCheckPythonPath.Start();
 
-                cmdCheckPythonPath.StandardInput.WriteLine("py ..\\..\\pythonScripts\\readFile.py");
+                cmdCheckPythonPath.StandardInput.WriteLine("py ..\\..\\pythonScripts\\getPyDir.py");
                 cmdCheckPythonPath.StandardInput.Flush();
                 cmdCheckPythonPath.StandardInput.Close();
+                
                 cmdCheckPythonPath.WaitForExit();
 
-                Console.WriteLine(cmdCheckPythonPath.StandardOutput.ReadToEnd());
-
-                pythonFolder = cmdCheckPythonPath.StandardOutput.ReadToEnd();
             }
 
             catch (Exception exception)
@@ -156,8 +163,7 @@ namespace _2ARC
                 Console.WriteLine(exception);
                 MessageBox.Show("It seems we can't find python on your pc \n You need to install python to use our firewall", "Python is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            return pythonFolder;
+            
         }
     }
 }
