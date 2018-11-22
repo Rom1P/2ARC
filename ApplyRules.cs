@@ -13,7 +13,7 @@ namespace _2ARC
 {
     public partial class ApplyRules : Form
     {
-
+        //Two List that contains rules
         private List<string> IPAddressList;
         private List<string> PortList;
 
@@ -24,12 +24,8 @@ namespace _2ARC
             IPAddressList = new List<string>();
             PortList = new List<string>();
         }
-
-        private void buttonIconTray_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
+        
+        //Load files and display content in ListBox and save into lists
         private void ApplyRules_Load(object sender, EventArgs e)
         {
             try
@@ -64,23 +60,10 @@ namespace _2ARC
 
 
         }
+        
+        
 
-        private void ApplyRules_Resize(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                iconTray.Icon = new Icon(this.Icon, 100, 100); ;
-                iconTray.ShowBalloonTip(1000);
-                this.Hide();
-            }
-        }
-
-        private void OnClickIconTray(object sender, EventArgs e)
-        {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-        }
-
+        //Add Data to ListBox, List and write it into file
         private void AddNewIpButton_Click(object sender, EventArgs e)
         {
             string IPAddressString = IPtextBox.Text;
@@ -107,6 +90,8 @@ namespace _2ARC
             }
         }
 
+
+        //Add Data to ListBox, List and write it into file
         private void blockPortButton_Click(object sender, EventArgs e)
         {
             string PortString = textBoxPort.Text;
@@ -142,6 +127,7 @@ namespace _2ARC
             }
         }
 
+        //Clear content of ListBox,List and write List in file
         private void resetIPButton_Click(object sender, EventArgs e)
         {
             IPAddressList = new List<string>();
@@ -153,6 +139,7 @@ namespace _2ARC
             listBoxIP.Items.Clear();
         }
 
+        //Clear content of ListBox,List and write List in file
         private void resetPortButton_Click(object sender, EventArgs e)
         {
             PortList = new List<string>();
@@ -164,6 +151,8 @@ namespace _2ARC
             listBoxPort.Items.Clear();
         }
 
+
+        //With Selected Index attribute of ListBox, delete one element from ListBox, List and write list in file
         private void deleteSelectedIP_Click(object sender, EventArgs e)
         {
             try
@@ -177,12 +166,14 @@ namespace _2ARC
                 listBoxIP.Items.Remove(listBoxIP.SelectedItem);
             }
 
-            catch(Exception efkje)
+            catch(Exception exceptionListIP)
             {
-                Console.WriteLine(efkje);
+                Console.WriteLine(exceptionListIP);
             }
         }
 
+
+        //With Selected Index attribute of ListBox, delete one element from ListBox, List and write list in file
         private void RemovePortButton_Click(object sender, EventArgs e)
         {
             try
@@ -195,12 +186,14 @@ namespace _2ARC
 
                 listBoxPort.Items.Remove(listBoxPort.SelectedItem);
             }
-            catch
+            catch (Exception exceptionListPort)
             {
-                Console.WriteLine("flezk,fezlk");
+                Console.WriteLine(exceptionListPort);
             }
         }
 
+
+        //Redirect to Other windows
         private void menuButton_Click(object sender, EventArgs e)
         {
             LauncherWindow launcherWindowObject = new LauncherWindow();

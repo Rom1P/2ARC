@@ -34,6 +34,7 @@ namespace _2ARC
             this.WindowState = FormWindowState.Minimized;
         }
 
+        //On reduce display notification
         private void CurrentNetwork_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -44,12 +45,16 @@ namespace _2ARC
             }
         }
 
+
+        //Disaply window
         private void OnClickIconTray(object sender, EventArgs e)
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
         }
 
+
+        //Launch process to execute python script analyseCurrentNetwork
         private void StartButton_Click(object sender, EventArgs e)
         {
             GetPythonPath();
@@ -57,6 +62,7 @@ namespace _2ARC
             string absolutePathPython = File.ReadAllText("..\\..\\pythonScripts\\localPathPython.txt");
             string CompletePathPython;
 
+            //If DevMode window is visible
             if (checkBoxDevMode.Checked)
             {
                 CompletePathPython = absolutePathPython + "\\python.exe";
@@ -116,6 +122,13 @@ namespace _2ARC
             }
         }
 
+        //Timer to display dropped packets
+        private void timerReload_Tick(object sender, EventArgs e)
+        {
+            LoadDroppedPackets();
+        }
+
+        //Every 2 sec a C# timer call this method to read a file that contains list of all dropped packets by python script
         private void LoadDroppedPackets()
         {
             string BlockedPackets = File.ReadAllText("..\\..\\pythonScripts\\ListBlocked.txt");
@@ -157,11 +170,11 @@ namespace _2ARC
                 MessageBox.Show("It seems we can't find python on your pc \n You need to install python to use our firewall", "Python is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-        }
+        }        
 
-        private void timerReload_Tick(object sender, EventArgs e)
+        private void checkBoxDevMode_CheckedChanged(object sender, EventArgs e)
         {
-            LoadDroppedPackets();
+
         }
     }
 }

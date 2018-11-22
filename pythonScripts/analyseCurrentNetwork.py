@@ -1,5 +1,6 @@
 import pydivert
 
+
 def AnalysePackets():
     print("Start")
 
@@ -17,6 +18,8 @@ def AnalysePackets():
     with open('..\\..\\pythonScripts\\ListBlocked.txt', 'w') as ListBlocked:
         ListBlocked.write("")
 
+    '''Get All packets and check if IP/Port of Source/Destination are in rules. In this case they will be dropped and 
+    them information will be wrote to the file '''
     with pydivert.WinDivert() as w:
         for packet in w:
             if str(packet.src_port) in PortList or str(packet.dst_port) in PortList:
@@ -39,11 +42,13 @@ def AnalysePackets():
                             packet.dst_port) + " --> Dropped For IP \n")
 
             else:
+                '''Drop of packets means we doesn't reinject him in the windows network stack'''
                 w.send(packet)
                 print(packet.src_addr, packet.src_port, " ---> ", packet.dst_addr, packet.dst_port)
 
     print("Done")
 
+'''Get Rules'''
 
 def GetIPList():
     IPList = []

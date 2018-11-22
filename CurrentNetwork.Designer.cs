@@ -42,12 +42,17 @@
             // 
             // buttonIconTray
             // 
-            this.buttonIconTray.Location = new System.Drawing.Point(810, 702);
+            this.buttonIconTray.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonIconTray.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.buttonIconTray.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonIconTray.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonIconTray.ForeColor = System.Drawing.Color.White;
+            this.buttonIconTray.Location = new System.Drawing.Point(810, 687);
             this.buttonIconTray.Name = "buttonIconTray";
-            this.buttonIconTray.Size = new System.Drawing.Size(197, 38);
+            this.buttonIconTray.Size = new System.Drawing.Size(197, 53);
             this.buttonIconTray.TabIndex = 2;
             this.buttonIconTray.Text = "Reduce To System Tray";
-            this.buttonIconTray.UseVisualStyleBackColor = true;
+            this.buttonIconTray.UseVisualStyleBackColor = false;
             this.buttonIconTray.Click += new System.EventHandler(this.buttonIconTray_Click);
             // 
             // iconTray
@@ -61,50 +66,72 @@
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(455, 702);
+            this.stopButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.ForeColor = System.Drawing.Color.White;
+            this.stopButton.Location = new System.Drawing.Point(590, 603);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(112, 33);
+            this.stopButton.Size = new System.Drawing.Size(112, 51);
             this.stopButton.TabIndex = 3;
             this.stopButton.Text = "Stop";
-            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.UseVisualStyleBackColor = false;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // checkBoxDevMode
             // 
             this.checkBoxDevMode.AutoSize = true;
-            this.checkBoxDevMode.Location = new System.Drawing.Point(617, 711);
+            this.checkBoxDevMode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxDevMode.ForeColor = System.Drawing.Color.White;
+            this.checkBoxDevMode.Location = new System.Drawing.Point(427, 704);
             this.checkBoxDevMode.Name = "checkBoxDevMode";
-            this.checkBoxDevMode.Size = new System.Drawing.Size(133, 17);
+            this.checkBoxDevMode.Size = new System.Drawing.Size(160, 21);
             this.checkBoxDevMode.TabIndex = 4;
             this.checkBoxDevMode.Text = "Use Developper Mode";
             this.checkBoxDevMode.UseVisualStyleBackColor = true;
+            this.checkBoxDevMode.CheckedChanged += new System.EventHandler(this.checkBoxDevMode_CheckedChanged);
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(455, 649);
+            this.StartButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.StartButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.StartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.StartButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartButton.ForeColor = System.Drawing.Color.White;
+            this.StartButton.Location = new System.Drawing.Point(308, 603);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(112, 33);
+            this.StartButton.Size = new System.Drawing.Size(112, 51);
             this.StartButton.TabIndex = 5;
             this.StartButton.Text = "Start";
-            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.UseVisualStyleBackColor = false;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // menuButton
             // 
-            this.menuButton.Location = new System.Drawing.Point(12, 705);
+            this.menuButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.menuButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.menuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.menuButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuButton.ForeColor = System.Drawing.Color.White;
+            this.menuButton.Location = new System.Drawing.Point(12, 688);
             this.menuButton.Name = "menuButton";
-            this.menuButton.Size = new System.Drawing.Size(104, 33);
+            this.menuButton.Size = new System.Drawing.Size(145, 51);
             this.menuButton.TabIndex = 9;
             this.menuButton.Text = "Menu";
-            this.menuButton.UseVisualStyleBackColor = true;
+            this.menuButton.UseVisualStyleBackColor = false;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
             // listBoxOutput
             // 
+            this.listBoxOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.listBoxOutput.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxOutput.ForeColor = System.Drawing.Color.White;
             this.listBoxOutput.FormattingEnabled = true;
+            this.listBoxOutput.ItemHeight = 17;
             this.listBoxOutput.Location = new System.Drawing.Point(151, 82);
             this.listBoxOutput.Name = "listBoxOutput";
-            this.listBoxOutput.Size = new System.Drawing.Size(698, 485);
+            this.listBoxOutput.Size = new System.Drawing.Size(698, 480);
             this.listBoxOutput.TabIndex = 10;
             // 
             // timerReload
@@ -116,6 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(1019, 752);
             this.Controls.Add(this.listBoxOutput);
             this.Controls.Add(this.menuButton);
@@ -123,6 +151,7 @@
             this.Controls.Add(this.checkBoxDevMode);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.buttonIconTray);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CurrentNetwork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

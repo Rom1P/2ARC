@@ -23,6 +23,8 @@ namespace _2ARC
             
         }
 
+
+        //Redirect To Other Windows
         private void ReadButton_Click(object sender, EventArgs e)
         {
             ReadOutput ReadOutputWindow = new ReadOutput();
@@ -43,7 +45,5 @@ namespace _2ARC
             ApplyRulesWindow.Show();
             this.Hide();
         }
-
-        
     }
 }
